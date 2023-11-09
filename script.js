@@ -2,26 +2,31 @@
 const gridSidePX = 500;
 //maximum cells on each side
 const maxGridSize = 100;
+//initial cells on each side
+const gridSizeInput = document.querySelector('#grid-size-input');
+gridSizeInput.value = 4;
 
 //--- initializing page content --->
 
 //page elements
+const grid = document.querySelector('#grid');
 const gridSizeButton = document.querySelector('#grid-size-button');
-const gridSizeInput = document.querySelector('#grid-size-input');
 const clearButton = document.querySelector('#clear-button');
 const switchColorsButton = document.querySelector('#switch-colors-button');
 const rainbowModeButton = document.querySelector('#rainbow-mode-button');
 const rainbowStats = document.querySelector('#rainbow-stats');
 const modifiedSquaresStat = document.querySelector('#modified-squares-stat');
 const percentModifiedStat = document.querySelector('#percent-modified-stat');
+const statsDiv = document.querySelector('#stats');
 const congratulations = document.querySelector('#congratulations');
-
-//grid and squares
-const grid = document.querySelector('#grid');
+let modifiedSquaresCount = 0;
+let squaresCount;
+//fill grid with squares
 const singleSquare = document.createElement('div');
 createGrid(gridSizeInput.value);
 
 //--- event listeners --->
+
 //apply size input with button
 gridSizeButton.addEventListener('click', e => {
     recreateGrid(true)
@@ -36,6 +41,7 @@ gridSizeInput.addEventListener('keyup', e => {
 clearButton.addEventListener('click', e => {
     let squaresClass = document.querySelectorAll('.square');
     squaresClass.forEach(node => addClass(node, 'initial', 'removeAll'));
+    resetStats();
 });
 //switch colors
 let hoverClasses = ['hover1', 'hover2', 'hover3', 'hover4'];
@@ -55,17 +61,18 @@ rainbowModeButton.addEventListener('click', e => {
 function createGrid(size, hoverClass='hover1') {
     if (size > maxGridSize || size < 1) return;
     //setting up square
-    let gridSideCells = size;
-    let squareSide = gridSidePX/gridSideCells;
+    let gridSideSquares = size;
+    let squareSide = gridSidePX/gridSideSquares;
     singleSquare.style.width = `${squareSide}px`;
     singleSquare.style.height = `${squareSide}px`;
     singleSquare.classList.add('square', 'initial');
     //setting up grid
     let gridSize = size * size;
-    grid.style.width = `${gridSideCells * squareSide}px`;
-    grid.style.height = `${gridSideCells * squareSide}px`;
+    grid.style.width = `${gridSideSquares * squareSide}px`;
+    grid.style.height = `${gridSideSquares * squareSide}px`;
     fillGridWithNSquares(gridSize);
     addHoverToSquares(hoverClass);
+    resetStats();
 }
 
 function fillGridWithNSquares(n) {
@@ -73,11 +80,12 @@ function fillGridWithNSquares(n) {
         const singleSquareClone = singleSquare.cloneNode(true);
         grid.appendChild(singleSquareClone);
     };
+    squaresCount = grid.childNodes.length;
 }
 
 function recreateGrid(checkInput, hoverClass) {
     if (checkInput) {
-        if (gridSizeInput.value == grid.childNodes.length ** (1/2)) return;
+        if (gridSizeInput.value == squaresCount ** (1/2)) return;
     }
     if (gridSizeInput.value > maxGridSize || 
         gridSizeInput.value < 1)
@@ -87,13 +95,15 @@ function recreateGrid(checkInput, hoverClass) {
 }
 
 function addClass(node, classToAdd, classToRemove) {
+    let alreadyModified = false;
+    if (node.classList.contains(classToAdd)) return;
     if (classToAdd === 'random') {
+        if (node.style['background-color'] !== '') alreadyModified = true;
         node.style['background-color'] = randomColor();
     } else {
         node.classList.add(`${classToAdd}`);
     }
     if (classToRemove === 'removeAll') {
-        console.log(node.className);
         node.className = '';
         node.style['background-color'] = '';
         node.classList.add('square', 'initial');
@@ -102,6 +112,10 @@ function addClass(node, classToAdd, classToRemove) {
             node.classList.remove(`${classToRemove}`);
         }
     }
+    if (squaresCount >= modifiedSquaresCount && !alreadyModified) {
+            console.log('haha');
+            refreshStats();
+        }
 }
 
 function addEventAndClass(node, event, classToAdd, classToRemove) {
@@ -116,7 +130,7 @@ function addEventAndClassForEach(nodeList, event, classToAdd, classToRemove) {
 
 function addHoverToSquares(hoverClass) {
     let squaresClass = document.querySelectorAll('.square');
-    addEventAndClassForEach(squaresClass, 'mouseover', hoverClass, 'initial');
+    addEventAndClassForEach(squaresClass, 'mouseenter', hoverClass, 'initial');
 }
 
 function randomColor() {
@@ -126,4 +140,23 @@ function randomColor() {
     let randomRGB = `rgb(${red}, ${green}, ${blue})`;
     rainbowStats.textContent = randomRGB;
     return randomRGB;
+}
+
+function resetStats() {
+    modifiedSquaresCount = 0;
+    modifiedSquaresStat.textContent = '';
+    percentModifiedStat.textContent = '';
+    rainbowStats.textContent = '';
+    congratulations.textContent = '';
+}
+
+function refreshStats() {
+    if (squaresCount === modifiedSquaresCount) return;
+    modifiedSquaresCount++;
+    let percentPainted = (Math.round((modifiedSquaresCount / squaresCount) * 10000) / 100)
+    modifiedSquaresStat.textContent = 'Painted cells: ' + modifiedSquaresCount;
+    percentModifiedStat.textContent = 'Percent cells painted of total: ' + percentPainted + '%';
+    if (modifiedSquaresCount === squaresCount) {
+        congratulations.textContent = 'Congratulations! All cells painted.';
+    }
 }

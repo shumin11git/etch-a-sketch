@@ -21,14 +21,16 @@
 }
 
 body {
+    margin: 0 auto;
     height: 100vh;
+    width: 90vw;
     background: linear-gradient(
         185deg, 
         var(--color-background), 
-        var(--color-background) 60%, 
+        var(--color-background) 45%, 
         var(--color-element2) 105%);
     display: flex;
-    gap: 30px;
+    gap: 60px;
     justify-content: center;
     align-items: center;
 
@@ -37,7 +39,6 @@ body {
 .column {
     display: flex;
     flex-direction: column;
-    height: auto;
     justify-content: center;
 }
 
@@ -81,10 +82,11 @@ body {
 
 #settings-div {
     margin: 10px 0;
-    padding: 10px;
-    width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding: 20px;
+    background: linear-gradient(25deg, white -100%, transparent 45%);
+    border-radius: 20px;
 }
 
 #grid-size {
@@ -93,12 +95,13 @@ body {
 
 #grid-size-label {
     color: var(--color-text1);
-    font-size: 18px;
+    font-size: 16px;
+    margin: 0 10px 30px 0;
+    padding: 10px;
 }
 
 #grid-size-input {
     text-align: center;
-    margin: 0 20px 0 10px;
     font-size: 14px;
     color: var(--color-text1);
     border: 0;
@@ -107,6 +110,7 @@ body {
     height: 30px;
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
     background-color: var(--color-background);
+    
 }
 
 button {
@@ -116,13 +120,12 @@ button {
     color: var(--color-background);
     background-color: var(--color-text1);
     border: 0;
-    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.3));
     border-radius: 5px;
-    font-weight: bold;
 }
 
 button:active {
-    background-color: var(--color-cells2);
+    filter: opacity(70%);
 }
 
 #rainbow-mode-button {
@@ -146,9 +149,10 @@ button:active {
 /* left column */
 
 #logo {
-    padding: 30px 40px;
-    background: linear-gradient(155deg, white -50%, transparent 50%);
+    padding: 20px 40px;
+    background: linear-gradient(155deg, white -70%, transparent 45%);
     border-radius: 20px;
+    height: 200px;
 }
 
 .heading {
@@ -164,8 +168,9 @@ button:active {
 }
 
 #left-column {
-    justify-content: space-evenly;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex-shrink: 0;
 }
 
@@ -182,4 +187,28 @@ button:active {
     font-size: 12px;
     margin-top: -5px;
     font-family: monospace;
+}
+
+#stats > p {
+    width: 310px;
+    color: var(--color-text1);
+    margin: 1em;
+    font-size: 16px;
+    height: 16px;
+}
+
+#congratulations {
+    animation: 3s ease-in-out infinite colorful;
+}
+
+@keyframes colorful {
+    0% {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100% {
+        color: red;
+    }
 }
