@@ -10,6 +10,11 @@ const gridSizeButton = document.querySelector('#grid-size-button');
 const gridSizeInput = document.querySelector('#grid-size-input');
 const clearButton = document.querySelector('#clear-button');
 const switchColorsButton = document.querySelector('#switch-colors-button');
+const rainbowModeButton = document.querySelector('#rainbow-mode-button');
+const rainbowStats = document.querySelector('#rainbow-stats');
+const modifiedSquaresStat = document.querySelector('#modified-squares-stat');
+const percentModifiedStat = document.querySelector('#percent-modified-stat');
+const congratulations = document.querySelector('#congratulations');
 
 //grid and squares
 const grid = document.querySelector('#grid');
@@ -30,17 +35,19 @@ gridSizeInput.addEventListener('keyup', e => {
 //clear board
 clearButton.addEventListener('click', e => {
     let squaresClass = document.querySelectorAll('.square');
-    squaresClass.forEach(node => addClass(node, 'initial', 'hover1'));
+    squaresClass.forEach(node => addClass(node, 'initial', 'removeAll'));
 });
 //switch colors
 let hoverClasses = ['hover1', 'hover2', 'hover3', 'hover4'];
-//let randomHoverClass = hoverClasses[Math.floor(Math.random() * hoverClasses.length)];
 let hoverClassIndex = 0;
 switchColorsButton.addEventListener('click', e => {
     if (hoverClassIndex >= hoverClasses.length - 1) hoverClassIndex = 0;
     else hoverClassIndex++;
-    console.log(hoverClassIndex);
     recreateGrid(false, hoverClasses[hoverClassIndex]);
+})
+//rainbow mode
+rainbowModeButton.addEventListener('click', e => {
+    recreateGrid(false, 'random');
 })
 
 //--- functions --->
@@ -80,9 +87,20 @@ function recreateGrid(checkInput, hoverClass) {
 }
 
 function addClass(node, classToAdd, classToRemove) {
-    node.classList.add(`${classToAdd}`);
-    if (node.classList.contains(classToRemove)) {
-        node.classList.remove(`${classToRemove}`);
+    if (classToAdd === 'random') {
+        node.style['background-color'] = randomColor();
+    } else {
+        node.classList.add(`${classToAdd}`);
+    }
+    if (classToRemove === 'removeAll') {
+        console.log(node.className);
+        node.className = '';
+        node.style['background-color'] = '';
+        node.classList.add('square', 'initial');
+    } else {
+        if (node.classList.contains(classToRemove)) {
+            node.classList.remove(`${classToRemove}`);
+        }
     }
 }
 
@@ -91,12 +109,21 @@ function addEventAndClass(node, event, classToAdd, classToRemove) {
 }
 
 function addEventAndClassForEach(nodeList, event, classToAdd, classToRemove) {
-    nodeList.forEach(node =>
-        addEventAndClass(node, event, classToAdd, classToRemove)
-    );
+    nodeList.forEach(node => {
+        addEventAndClass(node, event, classToAdd, classToRemove);
+});
 }
 
 function addHoverToSquares(hoverClass) {
     let squaresClass = document.querySelectorAll('.square');
     addEventAndClassForEach(squaresClass, 'mouseover', hoverClass, 'initial');
+}
+
+function randomColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+    let randomRGB = `rgb(${red}, ${green}, ${blue})`;
+    rainbowStats.textContent = randomRGB;
+    return randomRGB;
 }

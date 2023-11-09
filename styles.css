@@ -17,7 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Verdana, sans-serif;
 }
 
 body {
@@ -97,6 +97,7 @@ body {
 }
 
 #grid-size-input {
+    text-align: center;
     margin: 0 20px 0 10px;
     font-size: 14px;
     color: var(--color-text1);
@@ -109,18 +110,37 @@ body {
 }
 
 button {
-    margin-left: auto;
+    width: 140px;
+    padding: 0 1em;
     height: 30px;
-    width: 100px;
     color: var(--color-background);
     background-color: var(--color-text1);
     border: 0;
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
     border-radius: 5px;
+    font-weight: bold;
 }
 
 button:active {
     background-color: var(--color-cells2);
+}
+
+#rainbow-mode-button {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 10%,
+        rgba(208, 222, 33, 1) 20%,
+        rgba(79, 220, 74, 1) 30%,
+        rgba(63, 218, 216, 1) 40%,
+        rgba(47, 201, 226, 1) 50%,
+        rgba(28, 127, 238, 1) 60%,
+        rgba(95, 21, 242, 1) 70%,
+        rgba(186, 12, 248, 1) 80%,
+        rgba(251, 7, 217, 1) 90%,
+        rgba(255, 0, 0, 1) 100%
+    );
+    color: black;
 }
 
 /* left column */
@@ -153,4 +173,13 @@ button:active {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+}
+
+#rainbow-stats {
+    color: var(--color-text1);
+    height: 15px;
+    font-size: 12px;
+    margin-top: -5px;
+    font-family: monospace;
 }
