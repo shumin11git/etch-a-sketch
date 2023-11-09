@@ -7,19 +7,23 @@ const maxGridSize = 100;
 
 const gridSizeButton = document.querySelector('#grid-size-button');
 const gridSizeInput = document.querySelector('#grid-size-input');
+const clearButton = document.querySelector('#clear-button');
 const grid = document.querySelector('#grid');
 const singleSquare = document.createElement('div');
 
 createGrid(gridSizeInput.value);
 
-//--- event listener for button --->
+//--- event listeners for buttons --->
 
 gridSizeButton.addEventListener('click', recreateGrid);
+
 gridSizeInput.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
         recreateGrid();
     }
 })
+
+clearButton.addEventListener('click', recreateGrid);
 
 //--- functions --->
 

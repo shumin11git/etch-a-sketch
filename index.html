@@ -4,20 +4,29 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Agbalumo">
         <script src="./script.js" defer></script>
-        <title>Etch A Sketch</title>
+        <title>Etch-a-Sketch</title>
     </head>
     <body>
-        <div class="column"></div>
-        <div class="column" id="grid-column">
-            <div id="grid-size-div">
-                <label id="grid-size-label" for="grid-size-input">Enter grid size up to 100:</label>
-                <input id="grid-size-input" type="number" min="1" max="100" value="16">
-                <button id="grid-size-button">Set</button>
+        <div class="column" id="left-column">
+            <div id="logo">
+                <h1 class="heading" id="etch-heading">Etch-a-Sketch</h1>
+                <h2 class="heading" id="shumin-heading">by shumin11</h2>
             </div>
-            <div id="grid">
+            <div id="settings-div">
+                <div id="grid-size">
+                    <label id="grid-size-label" for="grid-size-input">Enter grid size up to 100:</label>
+                    <input id="grid-size-input" type="number" min="1" max="100" value="16">
+                </div>
+                <div id="buttons-div">
+                    <button id="grid-size-button">Set</button>
+                    <button id="clear-button">Clear board</button>
+                </div>
             </div>
         </div>
-        <div class="column"></div>
+        <div class="column" id="right-column">
+            <div id="grid"></div>
+        </div>
     </body>
 </html>

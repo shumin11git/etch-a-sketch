@@ -31,6 +31,14 @@ body {
 
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+}
+
+
 /* grid and cell setup */
 
 #grid {
@@ -54,45 +62,80 @@ body {
     background-color: var(--color-cells2);
 }
 
+/* right column */
 
-/* grid column */
-
-#grid-column {
-    display: flex;
-    flex-direction: column;
-}
-
-#grid-size-div {
+#settings-div {
     margin: 10px 0;
     padding: 10px;
     width: 100%;
     display: flex;
-    border-bottom: 3px solid var(--color-cells2);
     align-items: center;
+}
+
+#grid-size {
+    align-self: flex-start;
 }
 
 #grid-size-label {
     color: var(--color-text1);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #grid-size-input {
-    margin: 0 20px;
-    font-size: 16px;
-    border: 1px solid var(--color-text1);
+    margin: 0 20px 0 10px;
+    font-size: 14px;
+    color: var(--color-text1);
+    border: 0;
+    border-radius: 5px;
     padding: 3px;
+    height: 30px;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+    background-color: var(--color-background);
 }
 
-#grid-size-button {
+button {
     margin-left: auto;
     height: 30px;
     width: 100px;
     color: var(--color-background);
     background-color: var(--color-text1);
     border: 0;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3))
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+    border-radius: 5px;
 }
 
-#grid-size-button:active {
+button:active {
     background-color: var(--color-cells2);
+}
+
+/* left column */
+
+#logo {
+    padding: 30px 40px;
+    background: linear-gradient(155deg, white -50%, transparent 50%);
+    border-radius: 20px;
+}
+
+.heading {
+    font-family: Agbalumo, serif;
+}
+
+#etch-heading {
+    color: var(--color-text1);
+}
+
+#shumin-heading {
+    color: var(--color-text2);
+}
+
+#left-column {
+    justify-content: space-evenly;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+#buttons-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
