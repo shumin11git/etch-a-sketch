@@ -8,8 +8,16 @@
         <title>Etch A Sketch</title>
     </head>
     <body>
-        <div id="grid">
-            
+        <div class="column"></div>
+        <div class="column" id="grid-column">
+            <div id="grid-size-div">
+                <label id="grid-size-label" for="grid-size-input">Enter grid size up to 100:</label>
+                <input id="grid-size-input" type="number" min="1" max="100" value="16">
+                <button id="grid-size-button">Set</button>
+            </div>
+            <div id="grid">
+            </div>
         </div>
+        <div class="column"></div>
     </body>
 </html>

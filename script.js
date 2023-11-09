@@ -1,29 +1,25 @@
-//--- grid size variables --->
+//grid size in pixels
 
 const gridSidePX = 500;
-const gridSideCells = 16;
-const squareSide = gridSidePX/gridSideCells;
-
+const maxGridSize = 100;
 
 //--- initializing grid and squares --->
 
-//setting up squares
-const singleSquare = document.createElement('div');
-singleSquare.style.width = `${squareSide}px`;
-singleSquare.style.height = `${squareSide}px`;
-singleSquare.classList.add('square', 'initial');
-//setting up grid
+const gridSizeButton = document.querySelector('#grid-size-button');
+const gridSizeInput = document.querySelector('#grid-size-input');
 const grid = document.querySelector('#grid');
-const gridSize = gridSideCells * gridSideCells;
-grid.style.width = `${gridSideCells * squareSide}px`;
-grid.style.height = `${gridSideCells * squareSide}px`;
-fillGridWithNSquares(gridSize);
+const singleSquare = document.createElement('div');
 
+createGrid(gridSizeInput.value);
 
-//--- event listeners for square --->
+//--- event listener for button --->
 
-const squaresClass = document.querySelectorAll('.square');
-addEventAndClassForEach(squaresClass, 'mouseover', 'hover', 'initial');
+gridSizeButton.addEventListener('click', recreateGrid);
+gridSizeInput.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+        recreateGrid();
+    }
+})
 
 //--- functions --->
 
@@ -45,4 +41,31 @@ function addEventAndClassForEach(nodeList, event, classToAdd, classToRemove) {
     nodeList.forEach(node =>
         addEventAndClass(node, event, classToAdd, classToRemove)
     );
+}
+
+function createGrid(size) {
+    if (size > maxGridSize || size < 1) return;
+    //setting up square
+    let gridSideCells = size;
+    let squareSide = gridSidePX/gridSideCells;
+    singleSquare.style.width = `${squareSide}px`;
+    singleSquare.style.height = `${squareSide}px`;
+    singleSquare.classList.add('square', 'initial');
+    //setting up grid
+    let gridSize = size * size;
+    grid.style.width = `${gridSideCells * squareSide}px`;
+    grid.style.height = `${gridSideCells * squareSide}px`;
+    fillGridWithNSquares(gridSize);
+    addHoverToSquares();
+}
+
+function recreateGrid() {
+    if (gridSizeInput.value > maxGridSize || gridSizeInput.value < 1) return;
+    grid.innerHTML = '';
+    createGrid(gridSizeInput.value);
+}
+
+function addHoverToSquares() {
+    let squaresClass = document.querySelectorAll('.square');
+    addEventAndClassForEach(squaresClass, 'mouseover', 'hover', 'initial');
 }
