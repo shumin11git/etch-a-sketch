@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: grey;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    border: 0.5px solid grey;
+}
+
+.initial {
+    background-color: black;
+}
