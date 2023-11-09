@@ -26,3 +26,7 @@ body {
 .initial {
     background-color: black;
 }
+
+.hover {
+    background-color: white;
+}
