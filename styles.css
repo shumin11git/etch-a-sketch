@@ -1,7 +1,10 @@
 /* page setup */
 
 :root {
-    --color-background: #cddfee;
+    --color-background1: #cddfee;
+    --color-background2: #558246;
+    --color-background3: #93d8c7;
+    --color-background4: #e2ffa9;
     --color-text1: #1b321e;
     --color-text2: #7ba3a3;
     --color-cells-initial: #7cae73;
@@ -9,8 +12,6 @@
     --color-cells2: #0690bd;
     --color-cells3: #672f7a;
     --color-cells4: #e4c607;
-    --color-element1: #e8d7b9;
-    --color-element2: #558246;
 }
 
 * {
@@ -26,9 +27,9 @@ body {
     width: 90vw;
     background: linear-gradient(
         185deg, 
-        var(--color-background), 
-        var(--color-background) 45%, 
-        var(--color-element2) 105%);
+        var(--color-background1), 
+        var(--color-background1) 45%, 
+        var(--color-background2) 105%);
     display: flex;
     gap: 60px;
     justify-content: center;
@@ -110,7 +111,7 @@ body {
     padding: 3px;
     height: 30px;
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
-    background-color: var(--color-background);
+    background-color: var(--color-background1);
     
 }
 
@@ -118,7 +119,7 @@ button {
     width: 140px;
     padding: 0 1em;
     height: 30px;
-    color: var(--color-background);
+    color: var(--color-background1);
     background-color: var(--color-text1);
     border: 0;
     filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.3));
@@ -206,6 +207,10 @@ button:active {
     animation: 3s ease-in-out 1 expanding-shadow-animation;
 }
 
+.expanding-shadow-logo {
+    animation: 3s ease-in-out 1 expanding-shadow-animation-logo;
+}
+
 @keyframes colorful-text-animation {
     0% {
         color: red;
@@ -258,4 +263,50 @@ button:active {
     100% {
         filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
     }
+}
+
+@keyframes expanding-shadow-animation-logo {
+    5% {
+        filter: drop-shadow(0 0 0px white);
+    }
+    20% {
+        filter: drop-shadow(0 0 150px rgba(255, 255, 0, 0.8));
+    }
+    35% {
+        filter: drop-shadow(0 0 140px rgba(255, 255, 0, 0.8));
+    }
+    75% {
+        filter: drop-shadow(0 0 80px transparent);
+    }
+}
+
+.decoration {
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+#decoration1 {
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: -10%;
+    background-color: var(--color-background2);
+}
+
+#decoration2 {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: -10%;
+    background-color: var(--color-background4);
+}
+
+#decoration3 {
+    width: 700px;
+    height: 700px;
+    top: 5%;
+    left: 15%;
+    background-color: var(--color-background3);
 }

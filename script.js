@@ -19,6 +19,7 @@ const modifiedSquaresStat = document.querySelector('#modified-squares-stat');
 const percentModifiedStat = document.querySelector('#percent-modified-stat');
 const statsDiv = document.querySelector('#stats');
 const congratulations = document.querySelector('#congratulations');
+const logo = document.querySelector('#logo');
 let modifiedSquaresCount = 0;
 let squaresCount;
 //fill grid with squares
@@ -148,6 +149,7 @@ function resetStats() {
     rainbowStats.textContent = '';
     congratulations.textContent = '';
     grid.classList.remove('expanding-shadow');
+    logo.classList.remove('expanding-shadow-logo');
 }
 
 function refreshStats() {
@@ -159,7 +161,6 @@ function refreshStats() {
     if (modifiedSquaresCount === squaresCount) {
         congratulations.textContent = 'Congratulations! All cells painted.';
         grid.classList.add('expanding-shadow');
-        let a = document.querySelector('.expanding-shadow');
-        console.log(a);
+        logo.classList.add('expanding-shadow-logo');
     }
 }
