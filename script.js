@@ -113,7 +113,6 @@ function addClass(node, classToAdd, classToRemove) {
         }
     }
     if (squaresCount >= modifiedSquaresCount && !alreadyModified) {
-            console.log('haha');
             refreshStats();
         }
 }
@@ -148,6 +147,7 @@ function resetStats() {
     percentModifiedStat.textContent = '';
     rainbowStats.textContent = '';
     congratulations.textContent = '';
+    grid.classList.remove('expanding-shadow');
 }
 
 function refreshStats() {
@@ -158,5 +158,8 @@ function refreshStats() {
     percentModifiedStat.textContent = 'Percent cells painted of total: ' + percentPainted + '%';
     if (modifiedSquaresCount === squaresCount) {
         congratulations.textContent = 'Congratulations! All cells painted.';
+        grid.classList.add('expanding-shadow');
+        let a = document.querySelector('.expanding-shadow');
+        console.log(a);
     }
 }

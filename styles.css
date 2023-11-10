@@ -49,8 +49,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     box-sizing: content-box;
-    border: 0.5px solid var(--color-cells1);
+    border: 2px solid var(--color-cells1);
     filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
+    margin: 2px;
 }
 
 .square {
@@ -177,7 +178,7 @@ button:active {
 #buttons-div {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
     align-items: center;
 }
 
@@ -198,10 +199,14 @@ button:active {
 }
 
 #congratulations {
-    animation: 3s ease-in-out infinite colorful;
+    animation: 3s ease-in-out infinite colorful-text-animation;
 }
 
-@keyframes colorful {
+.expanding-shadow {
+    animation: 3s ease-in-out 1 expanding-shadow-animation;
+}
+
+@keyframes colorful-text-animation {
     0% {
         color: red;
     }
@@ -210,5 +215,47 @@ button:active {
     }
     100% {
         color: red;
+    }
+}
+
+@keyframes colorful-border-animation {
+    0% {
+        border: 2px solid red;
+    }
+    50% {
+        border: 2px solid blue;
+    }
+    100% {
+        border: 2px solid red;
+    }
+}
+
+@keyframes expanding-shadow-animation {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
+    }
+    5% {
+        filter: drop-shadow(0 0 0px white);
+    }
+    20% {
+        filter: drop-shadow(0 0 150px rgba(255, 255, 0, 0.8));
+    }
+    35% {
+        filter: drop-shadow(0 0 140px rgba(255, 255, 0, 0.8));
+    }
+    75% {
+        filter: drop-shadow(0 0 80px transparent);
+    }
+    75% {
+        filter: none;
+    }
+    85% {
+        filter: none;
+    }
+    85% {
+        filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
     }
 }
