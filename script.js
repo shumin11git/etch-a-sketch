@@ -4,7 +4,7 @@ const gridSidePX = 500;
 const maxGridSize = 100;
 //initial cells on each side
 const gridSizeInput = document.querySelector('#grid-size-input');
-gridSizeInput.value = 4;
+gridSizeInput.value = 16;
 
 //--- initializing page content --->
 
